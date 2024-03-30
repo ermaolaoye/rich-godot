@@ -1,0 +1,129 @@
+[gd_scene load_steps=12 format=3 uid="uid://c8kilcbp3x4l1"]
+
+[ext_resource type="Texture2D" uid="uid://c724bvaktfafq" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_xsrk0"]
+[ext_resource type="PackedScene" uid="uid://ktv2bknvm55i" path="res://scenes/character.tscn" id="2_8ttki"]
+[ext_resource type="PackedScene" uid="uid://dq8lln3q63d4f" path="res://scenes/map_tile.tscn" id="3_lo5yq"]
+[ext_resource type="Script" path="res://scripts/MapTile.gd" id="4_4d8gx"]
+[ext_resource type="Script" path="res://scripts/SceneCamera.gd" id="4_ii5c4"]
+[ext_resource type="Script" path="res://scenes/test_scenes/FPS.gd" id="5_52t6y"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_68spp"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_vy7ri"]
+sky_material = SubResource("ProceduralSkyMaterial_68spp")
+
+[sub_resource type="Environment" id="Environment_s1ssg"]
+background_mode = 2
+sky = SubResource("Sky_vy7ri")
+tonemap_mode = 2
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0f1pm"]
+albedo_texture = ExtResource("1_xsrk0")
+uv1_triplanar = true
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ryey5"]
+size = Vector2(100, 100)
+
+[node name="TestScene" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 7.73643, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_s1ssg")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_0f1pm")
+mesh = SubResource("PlaneMesh_ryey5")
+
+[node name="Character" parent="." instance=ExtResource("2_8ttki")]
+
+[node name="MapTiles" type="Node3D" parent="."]
+
+[node name="MapTile" parent="MapTiles" node_paths=PackedStringArray("previous_tile", "next_tile") instance=ExtResource("3_lo5yq")]
+script = ExtResource("4_4d8gx")
+previous_tile = NodePath("../MapTile7")
+next_tile = NodePath("../MapTile2")
+
+[node name="MapTile2" parent="MapTiles" node_paths=PackedStringArray("previous_tile", "next_tile") instance=ExtResource("3_lo5yq")]
+transform = Transform3D(0.99867, 0, 0.0515516, 0, 1, 0, -0.0515516, 0, 0.99867, 0.0682399, -9.53674e-07, -3.57803)
+script = ExtResource("4_4d8gx")
+previous_tile = NodePath("../MapTile3")
+next_tile = NodePath("../MapTile4")
+
+[node name="MapTile3" parent="MapTiles" instance=ExtResource("3_lo5yq")]
+transform = Transform3D(0.990256, 0, 0.13926, 0, 1, 0, -0.13926, 0, 0.990256, -0.581219, 0, -6.88219)
+script = ExtResource("4_4d8gx")
+
+[node name="MapTile4" parent="MapTiles" node_paths=PackedStringArray("previous_tile", "next_tile") instance=ExtResource("3_lo5yq")]
+transform = Transform3D(0.869374, 0, 0.494154, 0, 1, 0, -0.494154, 0, 0.869374, -1.82161, 9.53674e-07, -9.66253)
+script = ExtResource("4_4d8gx")
+previous_tile = NodePath("../MapTile3")
+next_tile = NodePath("../MapTile5")
+
+[node name="MapTile5" parent="MapTiles" node_paths=PackedStringArray("previous_tile", "next_tile") instance=ExtResource("3_lo5yq")]
+transform = Transform3D(0.511623, 0, 0.85921, 0, 1, 0, -0.85921, 0, 0.511623, -4.64885, 1.90735e-06, -11.8493)
+script = ExtResource("4_4d8gx")
+previous_tile = NodePath("../MapTile4")
+next_tile = NodePath("../MapTile6")
+
+[node name="MapTile6" parent="MapTiles" node_paths=PackedStringArray("previous_tile", "next_tile") instance=ExtResource("3_lo5yq")]
+transform = Transform3D(0.170519, 0, 0.985354, 0, 1, 0, -0.985354, 0, 0.170519, -8.24627, 1.90735e-06, -13.5481)
+script = ExtResource("4_4d8gx")
+previous_tile = NodePath("../MapTile5")
+next_tile = NodePath("../MapTile7")
+
+[node name="MapTile7" parent="MapTiles" node_paths=PackedStringArray("previous_tile", "next_tile") instance=ExtResource("3_lo5yq")]
+transform = Transform3D(-0.351956, 0, 0.936017, 0, 1, 0, -0.936017, 0, -0.351956, -11.9963, 3.8147e-06, -13.1539)
+script = ExtResource("4_4d8gx")
+previous_tile = NodePath("../MapTile6")
+next_tile = NodePath("../MapTile")
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.648107, 0.76155, 0, -0.76155, 0.648107, 2.08165e-12, 7, 5)
+current = true
+script = ExtResource("4_ii5c4")
+
+[node name="PlayerUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="Button" type="Button" parent="PlayerUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 35.0
+offset_top = -130.0
+offset_right = 282.0
+offset_bottom = -28.0
+grow_vertical = 0
+theme_override_font_sizes/font_size = 30
+text = "Roll Dice"
+
+[node name="DebugUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="FPS" type="Label" parent="DebugUI"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 13.0
+offset_right = 385.0
+offset_bottom = 66.0
+theme_override_font_sizes/font_size = 30
+text = "FPS"
+script = ExtResource("5_52t6y")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dq8lln3q63d4f"]
+
+[ext_resource type="Texture2D" uid="uid://3qcreohh1nq7" path="res://addons/kenney_prototype_textures/green/texture_08.png" id="1_nhnm4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h82ip"]
+albedo_texture = ExtResource("1_nhnm4")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_61xet"]
+size = Vector3(2, 0.1, 2)
+
+[node name="MapTile" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.05, 2.08165e-12)
+material_override = SubResource("StandardMaterial3D_h82ip")
+mesh = SubResource("BoxMesh_61xet")
+
+[node name="Center" type="Node3D" parent="."]
