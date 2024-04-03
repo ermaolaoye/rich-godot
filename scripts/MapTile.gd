@@ -1,13 +1,16 @@
+class_name MapTile
+
 extends Node3D
+
+@export var id: int;
 
 @export var previous_tile: Node3D;
 @export var next_tile: Node3D;
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+enum TileType {
+	Property,
+	Portal	
+}
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func get_next_tile():
+	return next_tile;

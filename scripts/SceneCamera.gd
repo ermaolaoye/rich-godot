@@ -1,3 +1,5 @@
+class_name RichCamera
+
 extends Camera3D
 	
 #func _input(event):
@@ -15,11 +17,14 @@ func _unhandled_input(event: InputEvent) -> void:
 			global_translate(Vector3(-delta.x * sensitivity, 0, -delta.y * sensitivity))
 			# <++> Camera Momentum?
 	if event.is_action_pressed("CameraReset"):
-		var root_node = get_parent()
-		var char_1 = root_node.get_node("Character");
-		camera_focus_on(char_1.global_position)
+		camera_focus_on_player()
 		
 
 func camera_focus_on(pos: Vector3):
 	# <++> Camera Animation
 	global_position = pos + Vector3(0, 7, 5)
+	
+func camera_focus_on_player():
+	var root_node = get_parent()
+	var char_1 = root_node.get_node("Character");
+	camera_focus_on(char_1.global_position)
