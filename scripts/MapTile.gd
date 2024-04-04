@@ -4,8 +4,8 @@ extends Node3D
 
 @export var id: int;
 
-@export var previous_tile: Node3D;
-@export var next_tile: Node3D;
+@export var previous_tile: MapTile;
+@export var next_tile: MapTile;
 
 enum TileType {
 	Property,
