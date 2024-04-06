@@ -1,7 +1,7 @@
 extends Button
 
 var rng = RandomNumberGenerator.new()
-var current_player: Character
+var current_player: RichCharacter
 var current_camera: RichCamera
 
 func _ready():
