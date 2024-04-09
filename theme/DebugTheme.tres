@@ -1,0 +1,6 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://iky7mlnwlgdw"]
+
+[ext_resource type="FontFile" uid="uid://bntow4665dwwd" path="res://fonts/debug/CascadiaCode/CaskaydiaCoveNerdFont-Regular.ttf" id="1_7mu7g"]
+
+[resource]
+Label/fonts/font = ExtResource("1_7mu7g")

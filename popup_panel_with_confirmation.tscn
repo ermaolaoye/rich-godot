@@ -1,0 +1,40 @@
+[gd_scene load_steps=2 format=3 uid="uid://chiv3uxmaryx0"]
+
+[ext_resource type="Script" path="res://scripts/ui/PurchaseEstatePanel.gd" id="1_rs7ak"]
+
+[node name="PurchaseEstateUI" type="Panel"]
+visible = false
+offset_left = 1312.0
+offset_top = -632.0
+offset_right = 1824.0
+offset_bottom = -448.0
+script = ExtResource("1_rs7ak")
+
+[node name="NoButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 128.0
+offset_right = 148.0
+offset_bottom = 176.0
+text = "No
+"
+
+[node name="YesButton" type="Button" parent="."]
+layout_mode = 2
+offset_left = 360.0
+offset_top = 128.0
+offset_right = 500.0
+offset_bottom = 176.0
+text = "Yes"
+
+[node name="Description" type="Label" parent="."]
+layout_mode = 2
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 504.0
+offset_bottom = 112.0
+text = "Description"
+autowrap_mode = 3
+
+[connection signal="pressed" from="NoButton" to="." method="_on_no_button_pressed"]
+[connection signal="pressed" from="YesButton" to="." method="_on_yes_button_pressed"]

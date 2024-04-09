@@ -1,0 +1,57 @@
+[gd_scene load_steps=10 format=3 uid="uid://ckeam5dvhbhtm"]
+
+[ext_resource type="Script" path="res://scripts/map_tiles/Estate.gd" id="1_04pfy"]
+[ext_resource type="Script" path="res://scripts/ClickableArea.gd" id="2_5i4ti"]
+[ext_resource type="Texture2D" uid="uid://my5182entnqo" path="res://addons/kenney_prototype_textures/orange/texture_09.png" id="2_w3md7"]
+[ext_resource type="Shader" path="res://shaders/albedo.gdshader" id="4_wmmuk"]
+[ext_resource type="FontFile" uid="uid://bntow4665dwwd" path="res://fonts/debug/CascadiaCode/CaskaydiaCoveNerdFont-Regular.ttf" id="5_lqlup"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d64vt"]
+size = Vector3(2, 0.1, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p3h57"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("4_wmmuk")
+shader_parameter/albedo_color = Color(1, 1, 1, 0.0627451)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xq6uc"]
+resource_local_to_scene = true
+next_pass = SubResource("ShaderMaterial_p3h57")
+albedo_texture = ExtResource("2_w3md7")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_vd1n3"]
+size = Vector3(2, 0.1, 2)
+
+[node name="Estate" type="Node3D" node_paths=PackedStringArray("debug_label")]
+script = ExtResource("1_04pfy")
+base_price = 1000
+debug_label = NodePath("TileDescription")
+
+[node name="ClickableArea" type="Area3D" parent="." node_paths=PackedStringArray("clickable_mesh", "debug_label")]
+script = ExtResource("2_5i4ti")
+clickable_mesh = NodePath("ClickableMesh")
+debug_label = NodePath("../TileDescription")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClickableArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 0)
+shape = SubResource("BoxShape3D_d64vt")
+
+[node name="ClickableMesh" type="MeshInstance3D" parent="ClickableArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 0.05, 2.08165e-12)
+material_override = SubResource("StandardMaterial3D_xq6uc")
+mesh = SubResource("BoxMesh_vd1n3")
+skeleton = NodePath("../..")
+
+[node name="Center" type="Node3D" parent="."]
+
+[node name="TileDescription" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0268574, 1.71551, 0.0101533)
+visible = false
+billboard = 1
+no_depth_test = true
+text = "TileDescription"
+font = ExtResource("5_lqlup")
+font_size = 100
+outline_size = 20

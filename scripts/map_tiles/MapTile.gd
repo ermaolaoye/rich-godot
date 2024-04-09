@@ -5,14 +5,12 @@ extends Node3D
 @export var id: int
 @export var tile_name: String
 
-@export var next_tile: Array[MapTile]
+@export var next_tile: MapTile
+
+func _ready():
+	# If not set name, set it to the node name
+	if tile_name == null:
+		tile_name = get_name()
 
 func get_next_tile():
-	if next_tile.size() == 0:
-		# TODO: No Next Tiles
-		pass # No next tile
-	elif next_tile.size() == 1:
-		return next_tile[0]
-	else:
-		# TODO: Multiple Next Tiles
-		pass
+	return next_tile

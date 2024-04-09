@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://c8kilcbp3x4l1"]
+[gd_scene load_steps=16 format=3 uid="uid://c8kilcbp3x4l1"]
 
 [ext_resource type="Texture2D" uid="uid://c724bvaktfafq" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_xsrk0"]
 [ext_resource type="PackedScene" uid="uid://ktv2bknvm55i" path="res://scenes/character.tscn" id="2_8ttki"]
@@ -6,7 +6,10 @@
 [ext_resource type="Script" path="res://scripts/map_tiles/MapTile.gd" id="4_4d8gx"]
 [ext_resource type="Script" path="res://scripts/SceneCamera.gd" id="4_ii5c4"]
 [ext_resource type="Script" path="res://scripts/debug/FPS.gd" id="5_52t6y"]
+[ext_resource type="PackedScene" uid="uid://ckeam5dvhbhtm" path="res://scenes/estate.tscn" id="5_t8p80"]
 [ext_resource type="Script" path="res://scripts/ui/RollButton.gd" id="7_qsf0p"]
+[ext_resource type="Theme" uid="uid://iky7mlnwlgdw" path="res://theme/DebugTheme.tres" id="7_uwqbx"]
+[ext_resource type="PackedScene" uid="uid://chiv3uxmaryx0" path="res://popup_panel_with_confirmation.tscn" id="8_sxhul"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_68spp"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -19,7 +22,6 @@ sky_material = SubResource("ProceduralSkyMaterial_68spp")
 background_mode = 2
 sky = SubResource("Sky_vy7ri")
 tonemap_mode = 2
-ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
@@ -48,45 +50,47 @@ material_override = SubResource("StandardMaterial3D_0f1pm")
 mesh = SubResource("PlaneMesh_ryey5")
 metadata/_edit_lock_ = true
 
-[node name="Character" parent="." node_paths=PackedStringArray("debug_label_player_money") instance=ExtResource("2_8ttki")]
+[node name="Character" parent="." node_paths=PackedStringArray("debug_label") instance=ExtResource("2_8ttki")]
 sync_to_physics = false
-debug_label_player_money = NodePath("../DebugUI/PlayerMoney")
+player_name = "TestPlayer"
+player_money = 10000
+debug_label = NodePath("../DebugUI/PlayerDebug")
 
 [node name="MapTiles" type="Node3D" parent="."]
 
 [node name="MapTile" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
 script = ExtResource("4_4d8gx")
-next_tile = [NodePath("../MapTile2")]
-
-[node name="MapTile2" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
-transform = Transform3D(0.99867, 0, 0.0515516, 0, 1, 0, -0.0515516, 0, 0.99867, 0.0682399, -9.53674e-07, -3.57803)
-script = ExtResource("4_4d8gx")
-next_tile = [NodePath("../MapTile3")]
-
-[node name="MapTile3" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
-transform = Transform3D(0.990256, 0, 0.13926, 0, 1, 0, -0.13926, 0, 0.990256, -0.581219, 0, -6.88219)
-script = ExtResource("4_4d8gx")
-next_tile = [NodePath("../MapTile4")]
-
-[node name="MapTile4" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
-transform = Transform3D(0.869374, 0, 0.494154, 0, 1, 0, -0.494154, 0, 0.869374, -1.82161, 9.53674e-07, -9.66253)
-script = ExtResource("4_4d8gx")
-next_tile = [NodePath("../MapTile5")]
+next_tile = NodePath("../Estate")
 
 [node name="MapTile5" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
 transform = Transform3D(0.511623, 0, 0.85921, 0, 1, 0, -0.85921, 0, 0.511623, -4.64885, 1.90735e-06, -11.8493)
 script = ExtResource("4_4d8gx")
-next_tile = [NodePath("../MapTile6")]
+next_tile = NodePath("../MapTile6")
 
 [node name="MapTile6" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
 transform = Transform3D(0.170519, 0, 0.985354, 0, 1, 0, -0.985354, 0, 0.170519, -8.24627, 1.90735e-06, -13.5481)
 script = ExtResource("4_4d8gx")
-next_tile = [NodePath("../MapTile7")]
+next_tile = NodePath("../MapTile7")
 
 [node name="MapTile7" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
 transform = Transform3D(-0.351956, 0, 0.936017, 0, 1, 0, -0.936017, 0, -0.351956, -11.9963, 3.8147e-06, -13.1539)
 script = ExtResource("4_4d8gx")
-next_tile = [NodePath("../MapTile")]
+next_tile = NodePath("../MapTile")
+
+[node name="Estate" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("5_t8p80")]
+transform = Transform3D(0.98796, -0.00108007, 0.154707, 0, 0.999976, 0.00698126, -0.15471, -0.00689721, 0.987936, -0.269302, 0, -3.39371)
+tile_name = "柯子岭"
+next_tile = NodePath("../Estate2")
+
+[node name="Estate2" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("5_t8p80")]
+transform = Transform3D(0.95019, 0, 0.311672, 0, 1, 0, -0.311672, 0, 0.95019, -1.0708, 0, -6.7024)
+tile_name = "盈翠华庭"
+next_tile = NodePath("../Estate3")
+
+[node name="Estate3" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("5_t8p80")]
+transform = Transform3D(0.786634, 0, 0.617421, 0, 1, 0, -0.617421, 0, 0.786634, -2.62982, 0, -9.36828)
+tile_name = "景泰小学"
+next_tile = NodePath("../MapTile5")
 
 [node name="MainCamera" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.648107, 0.76155, 0, -0.76155, 0.648107, 2.08165e-12, 7, 5)
@@ -115,35 +119,43 @@ text = "Roll Dice"
 script = ExtResource("7_qsf0p")
 debug_label = NodePath("../../DebugUI/DiceRolled")
 
+[node name="PopUpPanelWithConfirmation" parent="PlayerUI" instance=ExtResource("8_sxhul")]
+visible = true
+layout_mode = 0
+
 [node name="DebugUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="DiceRolled" type="Label" parent="DebugUI"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 66.0
-offset_right = 385.0
-offset_bottom = 119.0
-theme_override_font_sizes/font_size = 30
-text = "Dice Rolled: 0"
-
-[node name="PlayerMoney" type="Label" parent="DebugUI"]
-offset_left = 37.0
-offset_top = 122.0
-offset_right = 387.0
-offset_bottom = 175.0
-theme_override_font_sizes/font_size = 30
-text = "Player Money:"
-
 [node name="FPS" type="Label" parent="DebugUI"]
 layout_mode = 0
 offset_left = 35.0
-offset_top = 13.0
+offset_top = 34.0
 offset_right = 385.0
-offset_bottom = 66.0
+offset_bottom = 87.0
+theme = ExtResource("7_uwqbx")
 theme_override_font_sizes/font_size = 30
 text = "FPS"
 script = ExtResource("5_52t6y")
+
+[node name="DiceRolled" type="Label" parent="DebugUI"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 84.0
+offset_right = 385.0
+offset_bottom = 137.0
+theme = ExtResource("7_uwqbx")
+theme_override_font_sizes/font_size = 30
+text = "Dice Rolled: 0"
+
+[node name="PlayerDebug" type="Label" parent="DebugUI"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 134.0
+offset_right = 385.0
+offset_bottom = 187.0
+theme = ExtResource("7_uwqbx")
+theme_override_font_sizes/font_size = 30
+text = "Player Debug"
