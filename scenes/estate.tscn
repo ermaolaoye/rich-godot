@@ -13,7 +13,7 @@ size = Vector3(2, 0.1, 2)
 resource_local_to_scene = true
 render_priority = 0
 shader = ExtResource("4_wmmuk")
-shader_parameter/albedo_color = Color(1, 1, 1, 0.0627451)
+shader_parameter/albedo_color = Color(1, 1, 1, 0)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xq6uc"]
 resource_local_to_scene = true

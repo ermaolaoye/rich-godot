@@ -1,14 +1,18 @@
 [gd_scene load_steps=2 format=3 uid="uid://chiv3uxmaryx0"]
 
-[ext_resource type="Script" path="res://scripts/ui/PurchaseEstatePanel.gd" id="1_rs7ak"]
+[ext_resource type="Script" path="res://scripts/ui/PopupPanelWithConfirmation.gd" id="1_6ames"]
 
-[node name="PurchaseEstateUI" type="Panel"]
-visible = false
-offset_left = 1312.0
-offset_top = -632.0
-offset_right = 1824.0
-offset_bottom = -448.0
-script = ExtResource("1_rs7ak")
+[node name="PopupPanelWithConfirmation" type="Panel" node_paths=PackedStringArray("description_label")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1384.0
+offset_top = -640.0
+offset_right = 1896.0
+offset_bottom = -456.0
+grow_vertical = 0
+script = ExtResource("1_6ames")
+description_label = NodePath("Description")
 
 [node name="NoButton" type="Button" parent="."]
 layout_mode = 0

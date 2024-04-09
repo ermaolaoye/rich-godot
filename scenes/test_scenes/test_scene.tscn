@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c8kilcbp3x4l1"]
+[gd_scene load_steps=15 format=3 uid="uid://c8kilcbp3x4l1"]
 
 [ext_resource type="Texture2D" uid="uid://c724bvaktfafq" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_xsrk0"]
 [ext_resource type="PackedScene" uid="uid://ktv2bknvm55i" path="res://scenes/character.tscn" id="2_8ttki"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://ckeam5dvhbhtm" path="res://scenes/estate.tscn" id="5_t8p80"]
 [ext_resource type="Script" path="res://scripts/ui/RollButton.gd" id="7_qsf0p"]
 [ext_resource type="Theme" uid="uid://iky7mlnwlgdw" path="res://theme/DebugTheme.tres" id="7_uwqbx"]
-[ext_resource type="PackedScene" uid="uid://chiv3uxmaryx0" path="res://popup_panel_with_confirmation.tscn" id="8_sxhul"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_68spp"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -118,10 +117,6 @@ theme_override_font_sizes/font_size = 30
 text = "Roll Dice"
 script = ExtResource("7_qsf0p")
 debug_label = NodePath("../../DebugUI/DiceRolled")
-
-[node name="PopUpPanelWithConfirmation" parent="PlayerUI" instance=ExtResource("8_sxhul")]
-visible = true
-layout_mode = 0
 
 [node name="DebugUI" type="Control" parent="."]
 layout_mode = 3

@@ -13,6 +13,7 @@ config_version=5
 config/name="Rich"
 run/main_scene="res://scenes/test_scenes/test_scene.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [display]
