@@ -29,7 +29,7 @@ func _on_peer_disconnected(id):
 func _on_connected_to_server():
 	debug_server_label.text = "Connected to server: " + address_text_edit.text
 	print(player is RichPlayer)
-	send_player_information.rpc_id(1, player)
+	send_player_information.rpc_id(1, peer.get_unique_id(), player.player_name)
 
 func _on_disconnect_from_server():
 	print("Disconnected from server")
@@ -45,6 +45,8 @@ func _on_host_pressed():
 
 	multiplayer.set_multiplayer_peer(peer)
 
+	send_player_information(multiplayer.get_unique_id(), player.player_name)
+
 func _on_start_game_pressed():
 	start_game.rpc()
 
@@ -57,24 +59,27 @@ func start_game():
 	# Remove the current scene
 	queue_free()
 
-@rpc("any_peer", "call_local")
-func send_player_information(send_player: RichPlayer):
-	print("Received player information: ", send_player.player_name)
-	if GameManager.players.has(send_player.player_id):
-		GameManager.players[send_player.player_id].player_name = send_player.player_name
-	else:
-		GameManager.players[send_player.player_id] = send_player
+@rpc("any_peer")
+func send_player_information(id: int, player_name: String):
+	if !GameManager.players.has(id):
+		GameManager.players[id] = {
+			"player_name": player_name,
+			# TODO: Player Models etc.
+		}
 	
-	print(str(GameManager.players))
-	for i in GameManager.players:
-		debug_players_label.text += GameManager.players[i].player_name + "\n"
-
+	update_debug_players()
 	
 	if multiplayer.is_server():
+		# Send the player information to all clients
 		for i in GameManager.players:
-			send_player_information.rpc(GameManager.players[i])
-
-
+			send_player_information.rpc(i, GameManager.players[i]["player_name"])
+	
+func update_debug_players():
+	var players = ""
+	for i in GameManager.players:
+		players += GameManager.players[i]["player_name"] + "\n"
+	debug_players_label.text = "Players:\n" + players
+	
 func _on_connect_pressed():
 	peer = ENetMultiplayerPeer.new()
 	player.player_id = peer.get_unique_id()
@@ -82,6 +87,6 @@ func _on_connect_pressed():
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER) # Compress the data
 	multiplayer.set_multiplayer_peer(peer)
 
-func _on_text_edit_player_name_text_set():
+func _on_text_edit_player_name_text_changed():
 	player.player_name = player_name_text_edit.text
 	player.name = player_name_text_edit.text

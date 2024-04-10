@@ -20,8 +20,11 @@ offset_right = 1872.0
 offset_bottom = 128.0
 theme_override_fonts/font = ExtResource("1_6s738")
 theme_override_font_sizes/font_size = 50
-text = "楼同黑"
 placeholder_text = "请输入你的名字"
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+drag_and_drop_selection_enabled = false
 
 [node name="TextEditServerIP" type="TextEdit" parent="."]
 layout_mode = 0
@@ -79,7 +82,7 @@ theme_override_font_sizes/font_size = 50
 text = "Players:
 "
 
-[connection signal="text_set" from="TextEditPlayerName" to="." method="_on_text_edit_player_name_text_set"]
+[connection signal="text_changed" from="TextEditPlayerName" to="." method="_on_text_edit_player_name_text_changed"]
 [connection signal="pressed" from="Connect" to="." method="_on_connect_pressed"]
 [connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
 [connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
