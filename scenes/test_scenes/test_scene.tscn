@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://c8kilcbp3x4l1"]
 
 [ext_resource type="Texture2D" uid="uid://c724bvaktfafq" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_xsrk0"]
-[ext_resource type="PackedScene" uid="uid://ktv2bknvm55i" path="res://scenes/character.tscn" id="2_8ttki"]
+[ext_resource type="PackedScene" uid="uid://ktv2bknvm55i" path="res://scenes/player.tscn" id="2_8ttki"]
 [ext_resource type="PackedScene" uid="uid://dq8lln3q63d4f" path="res://scenes/map_tile.tscn" id="3_lo5yq"]
 [ext_resource type="Script" path="res://scripts/map_tiles/MapTile.gd" id="4_4d8gx"]
 [ext_resource type="Script" path="res://scripts/SceneCamera.gd" id="4_ii5c4"]
@@ -56,9 +56,6 @@ sync_to_physics = false
 player_name = "TestPlayer"
 player_money = 1000000
 debug_label = NodePath("../DebugUI/PlayerDebug")
-model_level_1_file = "res://models/test_house_level1.glb"
-model_level_2_file = "res://models/test_house_level2.glb"
-model_level_3_file = "res://models/test_house_level3.glb"
 
 [node name="MapTiles" type="Node3D" parent="."]
 
@@ -112,18 +109,21 @@ next_tile = NodePath("../MapTile5")
 [node name="Estate4" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("5_t8p80")]
 transform = Transform3D(0.952129, 0, 0.305696, 0, 1, 0, -0.305695, 0, 0.95213, -13.7901, -0.0236924, -6.20112)
 upgrade_gain_by_level = 0.5
+spawn_left = true
 tile_name = "万达广场"
 next_tile = NodePath("../Estate5")
 
 [node name="Estate5" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("5_t8p80")]
 transform = Transform3D(0.8131, 0, 0.582124, 0, 1, 0, -0.582123, 0, 0.813102, -12.6991, 0, -3.37483)
 upgrade_gain_by_level = 0.5
+spawn_left = true
 tile_name = "中华广场"
 next_tile = NodePath("../Estate6")
 
 [node name="Estate6" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("5_t8p80")]
 transform = Transform3D(0.322265, 0, 0.946651, 0, 1, 0, -0.946649, 0, 0.322268, -9.80185, 0, -0.950348)
 upgrade_gain_by_level = 0.5
+spawn_left = true
 tile_name = "天河城"
 next_tile = NodePath("../MapTile8")
 

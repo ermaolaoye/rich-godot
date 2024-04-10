@@ -3,6 +3,7 @@ class_name RichPlayer
 extends AnimatableBody3D
 
 @export var player_name: String
+var player_id: int
 var current_standing_tile: MapTile
 var current_tile: MapTile
 @export var player_dice: Dice = Dice.new()

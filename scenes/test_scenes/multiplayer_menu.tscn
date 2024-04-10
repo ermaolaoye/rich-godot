@@ -1,0 +1,85 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmce1n5gux33p"]
+
+[ext_resource type="FontFile" uid="uid://jbceoa433e8q" path="res://fonts/debug/CascadiaCode/CaskaydiaCoveNerdFontMono-Regular.ttf" id="1_6s738"]
+[ext_resource type="Script" path="res://scripts/ui/MultiplayerMenu.gd" id="1_gost0"]
+
+[node name="MultiplayerMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gost0")
+
+[node name="TextEditPlayerName" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 1456.0
+offset_top = 40.0
+offset_right = 1872.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("1_6s738")
+theme_override_font_sizes/font_size = 50
+text = "楼同黑"
+placeholder_text = "请输入你的名字"
+
+[node name="TextEditServerIP" type="TextEdit" parent="."]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 40.0
+offset_right = 624.0
+offset_bottom = 112.0
+theme_override_fonts/font = ExtResource("1_6s738")
+theme_override_font_sizes/font_size = 50
+text = "127.0.0.1"
+placeholder_text = "请输入 主机IP"
+
+[node name="Connect" type="Button" parent="."]
+layout_mode = 0
+offset_left = 656.0
+offset_top = 24.0
+offset_right = 952.0
+offset_bottom = 128.0
+theme_override_font_sizes/font_size = 50
+text = "连接"
+
+[node name="StartGame" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1672.0
+offset_top = 968.0
+offset_right = 1880.0
+offset_bottom = 1045.0
+theme_override_font_sizes/font_size = 50
+text = "开始游戏"
+
+[node name="Host" type="Button" parent="."]
+layout_mode = 0
+offset_left = 656.0
+offset_top = 168.0
+offset_right = 952.0
+offset_bottom = 280.0
+theme_override_font_sizes/font_size = 50
+text = "自己当主机"
+
+[node name="LabelDebugServer" type="Label" parent="."]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 992.0
+offset_right = 1048.0
+offset_bottom = 1061.0
+theme_override_font_sizes/font_size = 50
+
+[node name="LabelDebugPlayers" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1224.0
+offset_top = 160.0
+offset_right = 1872.0
+offset_bottom = 728.0
+theme_override_font_sizes/font_size = 50
+text = "Players:
+"
+
+[connection signal="text_set" from="TextEditPlayerName" to="." method="_on_text_edit_player_name_text_set"]
+[connection signal="pressed" from="Connect" to="." method="_on_connect_pressed"]
+[connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
