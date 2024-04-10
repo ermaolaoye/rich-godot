@@ -22,7 +22,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func camera_focus_on(pos: Vector3):
 	# <++> Camera Animation
-	global_position = pos + Vector3(0, 7, 5)
+	global_position = pos + Vector3(0, 9, 3)
 	
 func camera_focus_on_player():
 	var root_node = get_parent()

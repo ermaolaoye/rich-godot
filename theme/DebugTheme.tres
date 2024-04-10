@@ -1,6 +1,20 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://iky7mlnwlgdw"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://iky7mlnwlgdw"]
 
 [ext_resource type="FontFile" uid="uid://bntow4665dwwd" path="res://fonts/debug/CascadiaCode/CaskaydiaCoveNerdFont-Regular.ttf" id="1_7mu7g"]
+[ext_resource type="FontFile" uid="uid://dw2ut328cq7w" path="res://fonts/debug/CascadiaCode/CaskaydiaCoveNerdFont-Bold.ttf" id="2_6dc2r"]
+[ext_resource type="FontFile" uid="uid://r1l30p4grigf" path="res://fonts/debug/CascadiaCode/CaskaydiaCoveNerdFont-BoldItalic.ttf" id="3_taovp"]
+[ext_resource type="FontFile" uid="uid://bovroweme43e5" path="res://fonts/debug/CascadiaCode/CaskaydiaCoveNerdFont-Italic.ttf" id="4_g4lub"]
+[ext_resource type="FontFile" uid="uid://jbceoa433e8q" path="res://fonts/debug/CascadiaCode/CaskaydiaCoveNerdFontMono-Regular.ttf" id="5_3qqv3"]
 
 [resource]
 Label/fonts/font = ExtResource("1_7mu7g")
+RichTextLabel/font_sizes/bold_font_size = 30
+RichTextLabel/font_sizes/bold_italics_font_size = 30
+RichTextLabel/font_sizes/italics_font_size = 30
+RichTextLabel/font_sizes/mono_font_size = 30
+RichTextLabel/font_sizes/normal_font_size = 30
+RichTextLabel/fonts/bold_font = ExtResource("2_6dc2r")
+RichTextLabel/fonts/bold_italics_font = ExtResource("3_taovp")
+RichTextLabel/fonts/italics_font = ExtResource("4_g4lub")
+RichTextLabel/fonts/mono_font = ExtResource("5_3qqv3")
+RichTextLabel/fonts/normal_font = ExtResource("1_7mu7g")

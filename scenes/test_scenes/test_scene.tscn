@@ -21,12 +21,14 @@ sky_material = SubResource("ProceduralSkyMaterial_68spp")
 background_mode = 2
 sky = SubResource("Sky_vy7ri")
 tonemap_mode = 2
+ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
 glow_enabled = true
 fog_enabled = true
 fog_density = 0.005
+adjustment_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0f1pm"]
 albedo_texture = ExtResource("1_xsrk0")
@@ -52,8 +54,11 @@ metadata/_edit_lock_ = true
 [node name="Character" parent="." node_paths=PackedStringArray("debug_label") instance=ExtResource("2_8ttki")]
 sync_to_physics = false
 player_name = "TestPlayer"
-player_money = 10000
+player_money = 1000000
 debug_label = NodePath("../DebugUI/PlayerDebug")
+model_level_1_file = "res://models/test_house_level1.glb"
+model_level_2_file = "res://models/test_house_level2.glb"
+model_level_3_file = "res://models/test_house_level3.glb"
 
 [node name="MapTiles" type="Node3D" parent="."]
 
@@ -62,37 +67,68 @@ script = ExtResource("4_4d8gx")
 next_tile = NodePath("../Estate")
 
 [node name="MapTile5" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
-transform = Transform3D(0.511623, 0, 0.85921, 0, 1, 0, -0.85921, 0, 0.511623, -4.64885, 1.90735e-06, -11.8493)
+transform = Transform3D(0.360127, 0, 0.932903, 0, 1, 0, -0.932903, 0, 0.360127, -6.07749, 1.90735e-06, -10.7552)
 script = ExtResource("4_4d8gx")
 next_tile = NodePath("../MapTile6")
 
 [node name="MapTile6" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
-transform = Transform3D(0.170519, 0, 0.985354, 0, 1, 0, -0.985354, 0, 0.170519, -8.24627, 1.90735e-06, -13.5481)
+transform = Transform3D(-0.095533, 0, 0.995426, 0, 1, 0, -0.995426, 0, -0.095533, -9.74785, 1.90735e-06, -11.1186)
 script = ExtResource("4_4d8gx")
 next_tile = NodePath("../MapTile7")
 
 [node name="MapTile7" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
-transform = Transform3D(-0.351956, 0, 0.936017, 0, 1, 0, -0.936017, 0, -0.351956, -11.9963, 3.8147e-06, -13.1539)
+transform = Transform3D(-0.351956, 0, 0.936017, 0, 1, 0, -0.936017, 0, -0.351956, -13.1944, 3.8147e-06, -9.13326)
+script = ExtResource("4_4d8gx")
+next_tile = NodePath("../Estate4")
+
+[node name="MapTile8" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
+transform = Transform3D(-0.201865, 0, -0.979414, 0, 1, 0, 0.979414, 0, -0.201865, -6.46636, 7.6294e-06, 0.0842407)
+script = ExtResource("4_4d8gx")
+next_tile = NodePath("../MapTile9")
+
+[node name="MapTile9" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
+transform = Transform3D(-0.999901, 0, 0.0141547, 0, 1, 0, -0.0141547, 0, -0.999901, -3.23698, 1.33515e-05, 0.14406)
 script = ExtResource("4_4d8gx")
 next_tile = NodePath("../MapTile")
 
 [node name="Estate" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("5_t8p80")]
-transform = Transform3D(0.98796, -0.00108007, 0.154707, 0, 0.999976, 0.00698126, -0.15471, -0.00689721, 0.987936, -0.269302, 0, -3.39371)
+transform = Transform3D(0.98796, 0, 0.15471, 0, 1, 0, -0.15471, 0, 0.98796, -0.269302, 0, -3.39371)
+upgrade_gain_by_level = 0.5
 tile_name = "柯子岭"
 next_tile = NodePath("../Estate2")
 
 [node name="Estate2" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("5_t8p80")]
 transform = Transform3D(0.95019, 0, 0.311672, 0, 1, 0, -0.311672, 0, 0.95019, -1.0708, 0, -6.7024)
+upgrade_gain_by_level = 0.5
 tile_name = "盈翠华庭"
 next_tile = NodePath("../Estate3")
 
 [node name="Estate3" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("5_t8p80")]
-transform = Transform3D(0.786634, 0, 0.617421, 0, 1, 0, -0.617421, 0, 0.786634, -2.62982, 0, -9.36828)
+transform = Transform3D(0.707367, 0, 0.706848, 0, 1, 0, -0.706848, 0, 0.707367, -2.62982, 0, -9.36828)
+upgrade_gain_by_level = 0.5
 tile_name = "景泰小学"
 next_tile = NodePath("../MapTile5")
 
+[node name="Estate4" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("5_t8p80")]
+transform = Transform3D(0.952129, 0, 0.305696, 0, 1, 0, -0.305695, 0, 0.95213, -13.7901, -0.0236924, -6.20112)
+upgrade_gain_by_level = 0.5
+tile_name = "万达广场"
+next_tile = NodePath("../Estate5")
+
+[node name="Estate5" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("5_t8p80")]
+transform = Transform3D(0.8131, 0, 0.582124, 0, 1, 0, -0.582123, 0, 0.813102, -12.6991, 0, -3.37483)
+upgrade_gain_by_level = 0.5
+tile_name = "中华广场"
+next_tile = NodePath("../Estate6")
+
+[node name="Estate6" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("5_t8p80")]
+transform = Transform3D(0.322265, 0, 0.946651, 0, 1, 0, -0.946649, 0, 0.322268, -9.80185, 0, -0.950348)
+upgrade_gain_by_level = 0.5
+tile_name = "天河城"
+next_tile = NodePath("../MapTile8")
+
 [node name="MainCamera" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.648107, 0.76155, 0, -0.76155, 0.648107, 2.08165e-12, 7, 5)
+transform = Transform3D(1, 0, 0, 0, 0.447416, 0.894326, 0, -0.894326, 0.447416, 0, 9, 3)
 current = true
 script = ExtResource("4_ii5c4")
 
@@ -123,6 +159,7 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 
 [node name="FPS" type="Label" parent="DebugUI"]
 layout_mode = 0
@@ -145,12 +182,13 @@ theme = ExtResource("7_uwqbx")
 theme_override_font_sizes/font_size = 30
 text = "Dice Rolled: 0"
 
-[node name="PlayerDebug" type="Label" parent="DebugUI"]
+[node name="PlayerDebug" type="RichTextLabel" parent="DebugUI"]
 layout_mode = 0
 offset_left = 35.0
 offset_top = 134.0
-offset_right = 385.0
-offset_bottom = 187.0
+offset_right = 744.0
+offset_bottom = 504.0
+mouse_filter = 2
 theme = ExtResource("7_uwqbx")
-theme_override_font_sizes/font_size = 30
+bbcode_enabled = true
 text = "Player Debug"
