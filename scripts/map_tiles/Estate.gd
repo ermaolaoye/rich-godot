@@ -15,7 +15,8 @@ var model_level_3
 
 var spawn_location
 
-var owned_by: RichPlayer
+@export var owned_by: RichPlayer
+@export var owned: bool = false
 
 func _ready():
 	if spawn_left:
@@ -30,6 +31,7 @@ func _ready():
 func purchase(player: RichPlayer):
 	estate_level = 1
 	owned_by = player
+	owned = true
 	model_level_1 = player.model_level_1.instantiate()
 	model_level_2 = player.model_level_2.instantiate()
 	model_level_3 = player.model_level_3.instantiate()
@@ -61,6 +63,7 @@ func downgrade(level):
 func destroy():
 	estate_level = 0
 	owned_by = null
+	owned = false
 	update_model()
 	model_level_1 = null
 	model_level_2 = null
@@ -69,6 +72,7 @@ func destroy():
 		update_debug_label()
 
 func changeOwnership(player: RichPlayer):
+	owned = true
 	owned_by = player
 
 func get_upgrade_price():

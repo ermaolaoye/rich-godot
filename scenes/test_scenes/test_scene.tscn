@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://c8kilcbp3x4l1"]
+[gd_scene load_steps=16 format=3 uid="uid://c8kilcbp3x4l1"]
 
+[ext_resource type="Script" path="res://scripts/GameMode_Test.gd" id="1_ol4he"]
 [ext_resource type="Texture2D" uid="uid://c724bvaktfafq" path="res://addons/kenney_prototype_textures/dark/texture_01.png" id="1_xsrk0"]
 [ext_resource type="PackedScene" uid="uid://ktv2bknvm55i" path="res://scenes/player.tscn" id="2_8ttki"]
 [ext_resource type="PackedScene" uid="uid://dq8lln3q63d4f" path="res://scenes/map_tile.tscn" id="3_lo5yq"]
@@ -37,7 +38,9 @@ uv1_triplanar = true
 [sub_resource type="PlaneMesh" id="PlaneMesh_ryey5"]
 size = Vector2(100, 100)
 
-[node name="TestScene" type="Node3D"]
+[node name="GameScene" type="Node3D"]
+script = ExtResource("1_ol4he")
+player_scene = ExtResource("2_8ttki")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 7.73643, 0)
@@ -51,19 +54,13 @@ material_override = SubResource("StandardMaterial3D_0f1pm")
 mesh = SubResource("PlaneMesh_ryey5")
 metadata/_edit_lock_ = true
 
-[node name="Character" parent="." node_paths=PackedStringArray("debug_label") instance=ExtResource("2_8ttki")]
-sync_to_physics = false
-player_name = "TestPlayer"
-player_money = 1000000
-debug_label = NodePath("../DebugUI/PlayerDebug")
-
 [node name="MapTiles" type="Node3D" parent="."]
 
-[node name="MapTile" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
+[node name="MapTile" parent="MapTiles" node_paths=PackedStringArray("next_tile") groups=["PlayerSpawn"] instance=ExtResource("3_lo5yq")]
 script = ExtResource("4_4d8gx")
 next_tile = NodePath("../Estate")
 
-[node name="MapTile5" parent="MapTiles" node_paths=PackedStringArray("next_tile") instance=ExtResource("3_lo5yq")]
+[node name="MapTile5" parent="MapTiles" node_paths=PackedStringArray("next_tile") groups=["PlayerSpawn"] instance=ExtResource("3_lo5yq")]
 transform = Transform3D(0.360127, 0, 0.932903, 0, 1, 0, -0.932903, 0, 0.360127, -6.07749, 1.90735e-06, -10.7552)
 script = ExtResource("4_4d8gx")
 next_tile = NodePath("../MapTile6")
@@ -192,3 +189,7 @@ mouse_filter = 2
 theme = ExtResource("7_uwqbx")
 bbcode_enabled = true
 text = "Player Debug"
+
+[node name="Players" type="Node3D" parent="."]
+
+[connection signal="player_spawned" from="." to="PlayerUI/RollButton" method="_on_game_scene_player_spawned"]

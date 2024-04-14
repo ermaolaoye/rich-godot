@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ktv2bknvm55i"]
+[gd_scene load_steps=5 format=3 uid="uid://ktv2bknvm55i"]
 
 [ext_resource type="Script" path="res://scripts/RichPlayer.gd" id="1_qiuyh"]
 
@@ -6,12 +6,22 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ilbx7"]
 
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ckikc"]
+properties/0/path = NodePath(".:player_money")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+properties/1/path = NodePath(".:position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath(".:rotation")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath(".:scale")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
 [node name="Player" type="AnimatableBody3D"]
 script = ExtResource("1_qiuyh")
-player_money = 10000
-model_level_1_file = "res://models/test_house_level1.glb"
-model_level_2_file = "res://models/test_house_level2.glb"
-model_level_3_file = "res://models/test_house_level3.glb"
 
 [node name="Mesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 2.08165e-12)
@@ -21,3 +31,6 @@ skeleton = NodePath("../CollisionShape3D")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.08165e-12, 1, 2.08165e-12)
 shape = SubResource("CapsuleShape3D_ilbx7")
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_ckikc")

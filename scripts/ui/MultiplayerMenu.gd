@@ -7,9 +7,9 @@ extends Control
 
 @export var port = 8910
 
-var peer: ENetMultiplayerPeer
+var player_name: String
 
-var player: RichPlayer = preload("res://scenes/player.tscn").instantiate()
+var peer: ENetMultiplayerPeer
 
 func _ready():
 	multiplayer.allow_object_decoding = true
@@ -17,7 +17,7 @@ func _ready():
 	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
 	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	multiplayer.connection_failed.connect(_on_disconnect_from_server)
-	player.player_name = player_name_text_edit.text
+	player_name = player_name_text_edit.text
 	
 
 func _on_peer_connected(id):
@@ -28,8 +28,7 @@ func _on_peer_disconnected(id):
 
 func _on_connected_to_server():
 	debug_server_label.text = "Connected to server: " + address_text_edit.text
-	print(player is RichPlayer)
-	send_player_information.rpc_id(1, peer.get_unique_id(), player.player_name)
+	send_player_information.rpc_id(1, peer.get_unique_id(), player_name)
 
 func _on_disconnect_from_server():
 	print("Disconnected from server")
@@ -45,7 +44,7 @@ func _on_host_pressed():
 
 	multiplayer.set_multiplayer_peer(peer)
 
-	send_player_information(multiplayer.get_unique_id(), player.player_name)
+	send_player_information(multiplayer.get_unique_id(), player_name)
 
 func _on_start_game_pressed():
 	start_game.rpc()
@@ -55,15 +54,14 @@ func start_game():
 	# Create the game scene
 	var game_scene = load("res://scenes/test_scenes/test_scene.tscn").instantiate()
 	get_tree().get_root().add_child(game_scene)
+	hide()
 
-	# Remove the current scene
-	queue_free()
 
 @rpc("any_peer")
-func send_player_information(id: int, player_name: String):
+func send_player_information(id: int, player_name_str: String):
 	if !GameManager.players.has(id):
 		GameManager.players[id] = {
-			"player_name": player_name,
+			"player_name": player_name_str,
 			# TODO: Player Models etc.
 		}
 	
@@ -82,11 +80,9 @@ func update_debug_players():
 	
 func _on_connect_pressed():
 	peer = ENetMultiplayerPeer.new()
-	player.player_id = peer.get_unique_id()
 	peer.create_client(address_text_edit.text, port)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER) # Compress the data
 	multiplayer.set_multiplayer_peer(peer)
 
 func _on_text_edit_player_name_text_changed():
-	player.player_name = player_name_text_edit.text
-	player.name = player_name_text_edit.text
+	player_name = player_name_text_edit.text
